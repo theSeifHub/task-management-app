@@ -4,7 +4,6 @@
   "private": true,
   "author": "Seif Eldeen Ahmed",
   "license": "MIT",
-  "main": "public/index.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theSeifHub/task-management-app.git"
