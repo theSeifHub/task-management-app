@@ -12,6 +12,12 @@ input {
   border-radius: var(--border-radius-unit);
 }
 
+input:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
 button {
   height: 2em;
   border-radius: var(--border-radius-unit);
@@ -128,6 +134,12 @@ li.task-item {
   border-radius: calc(var(--border-radius-unit) * 2);
   margin-bottom: 1em;
   padding: 0.75em 0;
+}
+
+li.task-item:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
 }
 
 .task-details {
