@@ -24,29 +24,33 @@ const TaskItem = ({
   };
 
   return (
-    <li>
-      <h3>{taskTitle}</h3>
-      <p>{taskDescription}</p>
-      <button
-        title='Edit Task'
-        aria-label='Edit Task'
-        onClick={(e) => {
-          e.preventDefault();
-          handleEditClick();
-        }}
-      >
-        Edit
-      </button>
-      <button
-      title='Delete Task'
-        aria-label='Delete Task'
-        onClick={(e) => {
-          e.preventDefault();
-          handleDeleteClick();
-        }}
-      >
-        Delete
-      </button>
+    <li className='task-item'>
+      <div className='task-details'>
+        <h3 className='task-title'>{taskTitle}</h3>
+        <p>{taskDescription}</p>
+      </div>
+      <div className='task-actions'>
+        <button
+          title='Edit Task'
+          aria-label='Edit Task'
+          onClick={(e) => {
+            e.preventDefault();
+            handleEditClick();
+          }}
+        >
+          Edit
+        </button>
+        <button
+        title='Delete Task'
+          aria-label='Delete Task'
+          onClick={(e) => {
+            e.preventDefault();
+            handleDeleteClick();
+          }}
+        >
+          Delete
+        </button>
+      </div>
     </li>
   )
 }

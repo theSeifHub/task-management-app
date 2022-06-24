@@ -30,7 +30,8 @@ const TasksList = (): JSX.Element => {
     )
   }
   return (
-    <main>
+    <div className='tasks-list'>
+      <h2>Tasks List</h2>
       <ul>
         { isSearching ? displaySearchResults() : (
           tasks.map(task => (
@@ -43,7 +44,7 @@ const TasksList = (): JSX.Element => {
           ))
         )}
       </ul>
-    </main>
+    </div>
   )
 }
 

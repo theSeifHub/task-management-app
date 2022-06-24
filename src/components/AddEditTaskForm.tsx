@@ -43,7 +43,7 @@ const AddEditTaskForm = (): JSX.Element => {
     }
   }
   return (
-    <form>
+    <form className='task-form'>
       <label htmlFor='task-title'>Title</label>
       <input
         type='text'

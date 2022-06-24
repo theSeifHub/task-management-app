@@ -8,10 +8,12 @@ import {
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
-      <AddEditTaskForm />
-      <TasksList />
+      <main className='tasks-board'>
+        <AddEditTaskForm />
+        <TasksList />
+      </main>
     </div>
   );
 }

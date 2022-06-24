@@ -17,13 +17,13 @@ const SearchForm = () => {
   dispatch(clearSearchResults());
  }
   return (
-    <form>
-      <label htmlFor="search" />
+    <form className='search-form'>
+      <label htmlFor="search-input" />
       <input
         type="text"
-        name="search"
+        name="search-input"
         placeholder='Search'
-        id="search"
+        id="search-input"
         aria-label='Search Input'
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}

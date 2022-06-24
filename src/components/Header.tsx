@@ -3,7 +3,7 @@ import SearchForm from './SearchForm';
 
 const Header = (): JSX.Element => {
   return (
-    <header>
+    <header className='app-title'>
       <h1>
         Tasks Management App
       </h1>
