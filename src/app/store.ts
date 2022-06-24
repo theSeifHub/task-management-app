@@ -8,6 +8,7 @@ export const store = configureStore({
 export const selectTasks = (state: RootState) => state.tasks;
 export const selectTaskToEdit = (state: RootState) => state.taskToEdit;
 export const selectSearchResults = (state: RootState) => state.searchResults;
+export const selectIsSearching = (state: RootState) => state.isSearching;
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

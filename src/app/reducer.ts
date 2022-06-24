@@ -49,12 +49,10 @@ const tasksReducer = createReducer(initialState, (builder) => {
     }).addCase(searchTasks, (state, action: PayloadAction<string>) => {
       if (action.payload) {
         state.isSearching = true;
-        state.searchResults = state.tasks.map((task) => {
-          const hasQuery = (task.title.toLowerCase().search(action.payload.toLowerCase()) > -1)
-            || (task.description.toLowerCase().search(action.payload.toLowerCase()) > -1);
-          if (hasQuery) {
-            return task;
-          }
+        state.searchResults = state.tasks.filter((task) => {
+          const indexInTitle = task.title.toLowerCase().search(action.payload.toLowerCase());
+          const indexInDesc = task.description.toLowerCase().search(action.payload.toLowerCase());
+          return (indexInTitle > -1) || (indexInDesc > -1);
         });
       } else {
         state.isSearching = false;
