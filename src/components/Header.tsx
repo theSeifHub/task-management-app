@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import SearchForm from './SearchForm';
 
 const Header = (): JSX.Element => {
   return (
@@ -6,6 +7,7 @@ const Header = (): JSX.Element => {
       <h1>
         Tasks Management App
       </h1>
+      <SearchForm />
     </header>
   )
 }
