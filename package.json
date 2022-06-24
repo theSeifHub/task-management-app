@@ -4,14 +4,6 @@
   "private": true,
   "author": "Seif Eldeen Ahmed",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/theSeifHub/task-management-app.git"
-  },
-  "bugs": {
-    "url": "https://github.com/theSeifHub/task-management-app/issues"
-  },
-  "homepage": "https://github.com/theSeifHub/task-management-app#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
