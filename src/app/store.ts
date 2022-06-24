@@ -5,6 +5,7 @@ export const store = configureStore({
   reducer: tasksReducer,
 });
 
+export const selectTasks = (state: RootState) => state.tasks;
 export const selectTaskToEdit = (state: RootState) => state.taskToEdit;
 
 export type AppDispatch = typeof store.dispatch;

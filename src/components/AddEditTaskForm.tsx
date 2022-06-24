@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { selectTaskToEdit } from "../app/store";
 import {
   useAppDispatch,
@@ -16,9 +16,16 @@ const AddEditTaskForm = (): JSX.Element => {
   const [taskDescription, setTaskDescription] = useState(taskToEdit? taskToEdit.description : '');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleBtnClick = (newTitle: string , newDescription: string) => {
+  useEffect(() => {
+    setTaskTitle(taskToEdit?.title as string);
+    setTaskDescription(taskToEdit?.description as string);
+  }, [taskToEdit]);
+
+  const handleAddEditClick = (newTitle: string , newDescription: string) => {
     if (newTitle) {
       setErrorMsg('');
+      setTaskTitle('');
+      setTaskDescription('');
       if (taskToEdit) {
         dispatch(saveEditedTask({
           id: taskToEdit!.id,
@@ -32,7 +39,7 @@ const AddEditTaskForm = (): JSX.Element => {
         }));
       }
     } else {
-      setErrorMsg('Must Provide Title!');
+      setErrorMsg('Task title is missing!');
     }
   }
   return (
@@ -42,7 +49,7 @@ const AddEditTaskForm = (): JSX.Element => {
         type='text'
         name='task-title'
         id='task-title'
-        placeholder='e.g.: Buy Milk'
+        placeholder='Buy Milk'
         value={taskTitle}
         onChange={(e) => {setTaskTitle(e.target.value)}}
       />
@@ -51,7 +58,7 @@ const AddEditTaskForm = (): JSX.Element => {
         type='text'
         name='task-description'
         id='task-description'
-        placeholder='e.g.: 2 bottles, skimmed '
+        placeholder='2 bottles, skimmed '
         value={taskDescription}
         onChange={(e) => {setTaskDescription(e.target.value)}}
       />
@@ -60,7 +67,7 @@ const AddEditTaskForm = (): JSX.Element => {
         aria-label={taskToEdit ? 'Save Changes' : 'Add New Task'}
         onClick={(e) => {
           e.preventDefault();
-          handleBtnClick(taskTitle, taskDescription);
+          handleAddEditClick(taskTitle, taskDescription);
         }}
       >
         {taskToEdit ? 'Save Changes' : 'Add New Task'}

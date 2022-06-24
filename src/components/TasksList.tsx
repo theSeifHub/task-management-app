@@ -1,16 +1,23 @@
 import React from 'react'
+import { useAppSelector } from '../app/hooks';
+import { selectTasks } from '../app/store';
 import TaskItem from './TaskItem';
 
-type Props = {}
-
-const TasksList = ({}: Props): JSX.Element => {
+const TasksList = (): JSX.Element => {
+  const tasks = useAppSelector(selectTasks);
   return (
     <div>
       <ul>
-        <TaskItem taskId={1}></TaskItem>
-        <TaskItem taskId={3}></TaskItem>
-        <TaskItem taskId={5}></TaskItem>
-        <TaskItem taskId={7}></TaskItem>
+        {
+          tasks.map(task => (
+            <TaskItem
+              key={task.id}
+              taskId={task.id as number}
+              taskTitle={task.title} 
+              taskDescription={task.description} 
+            />
+          ))
+        }
       </ul>
     </div>
   )
