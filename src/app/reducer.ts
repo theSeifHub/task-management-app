@@ -8,15 +8,17 @@ import { generateId } from "./helpers";
 
 const initialState: TasksState = {
   tasks: [],
+  taskToEdit: null,
   isSearching: false,
   searchResults: [],
 };
 
-const addTask = createAction<ITask>('ADD_TASK');
-const editTask = createAction<ITask>('EDIT_TASK');
-const deleteTask = createAction<number>('DELETE_TASK');
-const searchTasks = createAction<string>('SEARCH_TASKS');
-const clearSearchResults = createAction('CLEAR_SEARCH_TASKS');
+export const addTask = createAction<ITask>('ADD_NEW_TASK');
+export const startEditingTask = createAction<ITask>('START_EDIT_TASK');
+export const saveEditedTask = createAction<ITask>('SAVE_EDIT_TASK');
+export const deleteTask = createAction<number>('DELETE_TASK');
+export const searchTasks = createAction<string>('SEARCH_TASKS');
+export const clearSearchResults = createAction('CLEAR_SEARCH_TASKS');
   
 
 const tasksReducer = createReducer(initialState, (builder) => {
@@ -27,11 +29,14 @@ const tasksReducer = createReducer(initialState, (builder) => {
         id: generateId(state.tasks.length),
       };
       state.tasks.push(newTask);
-    }).addCase(editTask, (state, action: PayloadAction<ITask>) => {
+    }).addCase(startEditingTask, (state, action: PayloadAction<ITask>) => {
+      state.taskToEdit = action.payload;
+    }).addCase(saveEditedTask, (state, action: PayloadAction<ITask>) => {
       if (action.payload.id) {
         state.tasks = state.tasks.map((task) => (
          task.id === action.payload.id ? action.payload : task
         ));
+        state.taskToEdit = null
       }
     }).addCase(deleteTask, (state, action: PayloadAction<number>) => {
       if (action.payload) {
