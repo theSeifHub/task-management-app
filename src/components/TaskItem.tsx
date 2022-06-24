@@ -1,4 +1,8 @@
-import React from 'react'
+import React from 'react';
+import {
+  FiEdit,
+  FiTrash2,
+} from "react-icons/fi";
 import { useAppDispatch } from "../app/hooks";
 import {
   startEditingTask,
@@ -38,7 +42,7 @@ const TaskItem = ({
             handleEditClick();
           }}
         >
-          Edit
+          <FiEdit className='btn-icon'/>
         </button>
         <button
         title='Delete Task'
@@ -48,7 +52,10 @@ const TaskItem = ({
             handleDeleteClick();
           }}
         >
-          Delete
+          <FiTrash2
+            className='btn-icon'
+            style={{color: '#c00'}}
+          />
         </button>
       </div>
     </li>

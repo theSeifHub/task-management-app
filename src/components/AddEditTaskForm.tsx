@@ -70,7 +70,7 @@ const AddEditTaskForm = (): JSX.Element => {
           handleAddEditClick(taskTitle, taskDescription);
         }}
       >
-        {taskToEdit ? 'Save Changes' : 'Add New Task'}
+        {taskToEdit ? 'Save Changes' : 'New Task'}
       </button>
       {errorMsg && <div style={{color: 'red'}}>{errorMsg}</div>}
     </form>

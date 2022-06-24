@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../app/hooks'
+import { FiSearch, FiX } from "react-icons/fi";
+import { useAppDispatch } from '../app/hooks';
 import {
   searchTasks,
   clearSearchResults,
-} from '../app/reducer'
+} from '../app/reducer';
 
 
 const SearchForm = () => {
@@ -28,18 +29,6 @@ const SearchForm = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      {searchQuery && (
-        <button
-          title='Search'
-          aria-label='Search'
-          onClick={(e) => {
-            e.preventDefault();
-            handleClearSearch();
-          }}
-        >
-          Clear
-        </button>
-      )}
       <button
         title='Search'
         aria-label='Search'
@@ -48,7 +37,18 @@ const SearchForm = () => {
           handleSearch(searchQuery);
         }}
       >
-        Search
+        <FiSearch className='btn-icon'/>
+      </button>
+      <button
+        title='Search'
+        aria-label='Search'
+        disabled={!searchQuery}
+        onClick={(e) => {
+          e.preventDefault();
+          handleClearSearch();
+        }}
+      >
+        <FiX className='btn-icon' />
       </button>
     </form>
   )
