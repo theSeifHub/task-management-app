@@ -100,6 +100,10 @@ h1 {
   align-self: flex-end;
 }
 
+.error-msg {
+  color: rgb(155, 0, 0);
+}
+
 .tasks-list {
   border-left: 1px var(--separator-border-color) solid;
   padding-left: 1em;
