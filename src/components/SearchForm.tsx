@@ -4,7 +4,7 @@ import { useAppDispatch } from '../app/hooks';
 import {
   searchTasks,
   clearSearchResults,
-} from '../app/reducer';
+} from '../app/actionsAndThunks';
 
 
 const SearchForm = () => {

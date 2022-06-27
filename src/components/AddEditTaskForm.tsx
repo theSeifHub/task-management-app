@@ -7,7 +7,7 @@ import {
 import {
   addTask,
   saveEditedTask,
-} from '../app/reducer';
+} from '../app/actionsAndThunks';
 
 const AddEditTaskForm = (): JSX.Element => {
   const dispatch = useAppDispatch();

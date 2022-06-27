@@ -7,7 +7,7 @@ import { useAppDispatch } from "../app/hooks";
 import {
   startEditingTask,
   deleteTask,
-} from "../app/reducer";
+} from "../app/actionsAndThunks";
 
 type Props = {
   taskId: number;
