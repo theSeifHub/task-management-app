@@ -23,9 +23,6 @@ const AddEditTaskForm = (): JSX.Element => {
 
   const handleAddEditClick = (newTitle: string , newDescription: string) => {
     if (newTitle) {
-      setErrorMsg('');
-      setTaskTitle('');
-      setTaskDescription('');
       if (taskToEdit) {
         dispatch(updateTask({
           id: taskToEdit!.id,
@@ -38,6 +35,9 @@ const AddEditTaskForm = (): JSX.Element => {
           description: newDescription,
         }));
       }
+      setErrorMsg('');
+      setTaskTitle('');
+      setTaskDescription('');
     } else {
       setErrorMsg('Task title is missing!');
     }
