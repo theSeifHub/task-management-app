@@ -107,7 +107,9 @@ h1 {
 }
 
 .error-msg {
-  color: rgb(155, 0, 0);
+  margin-top: 0.4em;
+  font-size: 1.1em;
+  color: #8d0000;
 }
 
 .tasks-list {

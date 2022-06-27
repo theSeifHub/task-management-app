@@ -54,7 +54,7 @@ const TaskItem = ({
         >
           <FiTrash2
             className='btn-icon'
-            style={{color: '#c00'}}
+            color='#c00'
           />
         </button>
       </div>
