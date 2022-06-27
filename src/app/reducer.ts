@@ -18,7 +18,6 @@ const initialState: TasksState = {
   tasks: [],
   taskToEdit: null,
   isSearching: false,
-  searchResults: [],
   status: Status.Idle,
 };
 
@@ -56,19 +55,18 @@ const tasksReducer = createReducer(initialState, (builder) => {
         }
         state.taskToEdit = null
       }
-    }).addCase(searchTasks, (state, action: PayloadAction<string>) => {
-      if (action.payload) {
-        state.isSearching = true;
-        state.searchResults = state.tasks.filter((task) => {
-          const indexInTitle = task.title.toLowerCase().search(action.payload.toLowerCase());
-          const indexInDesc = task.description.toLowerCase().search(action.payload.toLowerCase());
-          return (indexInTitle > -1) || (indexInDesc > -1);
-        });
-      } else {
-        state.isSearching = false;
-      }
+    }).addCase(searchTasks.pending, (state) => {
+      console.log('pending...');
+      state.status = Status.Loading;
+      state.isSearching = true;
+    }).addCase(searchTasks.fulfilled, (state, action) => {
+      state.tasks = action.payload.tasks;
+      state.status = Status.Success;
+      console.log('tasks list fulfilled', action);
+    }).addCase(searchTasks.rejected, (state, action) => {
+      state.status = Status.Failed; // TODO handle rejection and req failure
     }).addCase(clearSearchResults, (state) => {
-      state.searchResults = [];
+      state.tasks = [];
       state.isSearching = false;
     }).addDefaultCase(state => state);
 })

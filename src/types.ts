@@ -15,7 +15,7 @@ export interface TasksState {
   tasks: ITask[];
   taskToEdit: ITask | null,
   isSearching: boolean;
-  searchResults: (ITask | undefined)[];
+  searchResults?: (ITask | undefined)[];
   status: Status;
 }
 

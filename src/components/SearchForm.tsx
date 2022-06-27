@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FiSearch, FiX } from "react-icons/fi";
 import { useAppDispatch } from '../app/hooks';
 import {
-  searchTasks,
   clearSearchResults,
+  searchTasks,
 } from '../app/actionsAndThunks';
 
 
