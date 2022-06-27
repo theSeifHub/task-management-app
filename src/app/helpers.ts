@@ -1,1 +1,0 @@
-export const generateId = (num: number): number => (num + 1) * 2;

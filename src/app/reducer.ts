@@ -11,7 +11,6 @@ import {
   getTasksList,
 } from "./actionsAndThunks";
 import { TasksState, ITask, Status } from "../types";
-import { generateId } from "./helpers";
 
 const initialState: TasksState = {
   tasks: [],
