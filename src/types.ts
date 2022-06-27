@@ -18,3 +18,8 @@ export interface TasksState {
   searchResults: (ITask | undefined)[];
   status: Status;
 }
+
+export interface GetTasksResponse {
+  tasks: ITask[];
+  count: number;
+}

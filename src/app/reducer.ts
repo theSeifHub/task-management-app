@@ -9,6 +9,7 @@ import {
   searchTasks,
   clearSearchResults,
   deleteTask,
+  getTasksList,
 } from "./actionsAndThunks";
 import { TasksState, ITask, Status } from "../types";
 import { generateId } from "./helpers";
@@ -23,7 +24,16 @@ const initialState: TasksState = {
 
 const tasksReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(addTask, (state, action: PayloadAction<ITask>) => {
+    .addCase(getTasksList.pending, (state) => {
+      console.log('pending...');
+      state.status = Status.Loading;
+    }).addCase(getTasksList.fulfilled, (state, action) => {
+      state.tasks = action.payload.tasks;
+      state.status = Status.Success;
+      console.log('tasks list fulfilled', action);
+    }).addCase(getTasksList.rejected, (state, action) => {
+      state.status = Status.Failed; // TODO handle rejection and req failure
+    }).addCase(addTask, (state, action: PayloadAction<ITask>) => {
       const newTask: ITask = {
         ...action.payload,
         id: generateId(state.tasks.length),
