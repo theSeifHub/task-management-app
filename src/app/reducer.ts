@@ -7,7 +7,6 @@ import {
   startEditingTask,
   saveEditedTask,
   searchTasks,
-  clearSearchResults,
   deleteTask,
   getTasksList,
 } from "./actionsAndThunks";
@@ -26,6 +25,7 @@ const tasksReducer = createReducer(initialState, (builder) => {
     .addCase(getTasksList.pending, (state) => {
       console.log('pending...');
       state.status = Status.Loading;
+      state.isSearching = false;
     }).addCase(getTasksList.fulfilled, (state, action) => {
       state.tasks = action.payload.tasks;
       state.status = Status.Success;
@@ -65,9 +65,6 @@ const tasksReducer = createReducer(initialState, (builder) => {
       console.log('tasks list fulfilled', action);
     }).addCase(searchTasks.rejected, (state, action) => {
       state.status = Status.Failed; // TODO handle rejection and req failure
-    }).addCase(clearSearchResults, (state) => {
-      state.tasks = [];
-      state.isSearching = false;
     }).addDefaultCase(state => state);
 })
 

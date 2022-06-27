@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiSearch, FiX } from "react-icons/fi";
 import { useAppDispatch } from '../app/hooks';
 import {
-  clearSearchResults,
+  getTasksList,
   searchTasks,
 } from '../app/actionsAndThunks';
 
@@ -11,11 +11,13 @@ const SearchForm = () => {
   const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = useState('');
  const handleSearch = (query: string) => {
-  dispatch(searchTasks(query));
+  if (query) {
+    dispatch(searchTasks(query));
+  }
  }
  const handleClearSearch = () => {
   setSearchQuery('');
-  dispatch(clearSearchResults());
+  dispatch(getTasksList());
  }
   return (
     <form className='search-form'>
