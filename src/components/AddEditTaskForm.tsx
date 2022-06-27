@@ -6,7 +6,7 @@ import {
 } from '../app/hooks';
 import {
   addNewTask,
-  saveEditedTask,
+  updateTask,
 } from '../app/actionsAndThunks';
 
 const AddEditTaskForm = (): JSX.Element => {
@@ -27,7 +27,7 @@ const AddEditTaskForm = (): JSX.Element => {
       setTaskTitle('');
       setTaskDescription('');
       if (taskToEdit) {
-        dispatch(saveEditedTask({
+        dispatch(updateTask({
           id: taskToEdit!.id,
           title: newTitle,
           description: newDescription,

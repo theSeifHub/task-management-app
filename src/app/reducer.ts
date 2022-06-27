@@ -5,7 +5,7 @@ import {
 import {
   addNewTask,
   startEditingTask,
-  saveEditedTask,
+  updateTask,
   searchTasks,
   deleteTask,
   getTasksList,
@@ -41,13 +41,16 @@ const tasksReducer = createReducer(initialState, (builder) => {
       state.status = Status.Failed; // TODO handle rejection and req failure
     }).addCase(startEditingTask, (state, action: PayloadAction<number>) => {
       state.taskToEdit = state.tasks.find(task => task.id === action.payload)!;
-    }).addCase(saveEditedTask, (state, action: PayloadAction<ITask>) => {
-      if (action.payload.id) {
-        state.tasks = state.tasks.map((task) => (
-         task.id === action.payload.id ? action.payload : task
-        ));
-        state.taskToEdit = null
-      }
+    }).addCase(updateTask.pending, (state) => {
+      state.status = Status.Loading;
+    }).addCase(updateTask.fulfilled, (state, action) => {
+      state.tasks = state.tasks.map((task) => (
+        task.id === action.payload.id ? action.payload : task
+      ));
+      state.taskToEdit = null
+      state.status = Status.Idle;
+    }).addCase(updateTask.rejected, (state, action) => {
+      state.status = Status.Failed; // TODO handle rejection and req failure
     }).addCase(deleteTask, (state, action: PayloadAction<number>) => {
       if (action.payload) {
         const indexToDelete = state.tasks.findIndex((task) => task.id === action.payload);

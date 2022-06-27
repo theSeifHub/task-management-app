@@ -4,7 +4,6 @@ import tasksAxios from "./tasksAxios";
 
 // actions
 export const startEditingTask = createAction<number>('START_EDIT_TASK');
-export const saveEditedTask = createAction<ITask>('SAVE_EDIT_TASK');
 export const deleteTask = createAction<number>('DELETE_TASK');
 
 // thunks
@@ -32,6 +31,17 @@ export const addNewTask = createAsyncThunk(
     const response = await tasksAxios.post('/', newTask);
     return {
       ...newTask,
+      id: response.data.data as number,
+    };
+  }
+);
+
+export const updateTask = createAsyncThunk(
+  'UPDATE_TASK_ASYNC',
+  async (updatedTask: ITask, thunkAPI): Promise<ITask> => {
+    const response = await tasksAxios.put(`/${updatedTask.id}`, updatedTask);
+    return {
+      ...updatedTask,
       id: response.data.data as number,
     };
   }
