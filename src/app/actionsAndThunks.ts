@@ -4,7 +4,6 @@ import tasksAxios from "./tasksAxios";
 
 // actions
 export const startEditingTask = createAction<number>('START_EDIT_TASK');
-export const deleteTask = createAction<number>('DELETE_TASK');
 
 // thunks
 export const getTasksList = createAsyncThunk(
@@ -44,5 +43,13 @@ export const updateTask = createAsyncThunk(
       ...updatedTask,
       id: response.data.data as number,
     };
+  }
+);
+
+export const deleteTask = createAsyncThunk(
+  'DELETE_TASK_ASYNC',
+  async (taskId: number, thunkAPI): Promise<number> => {
+    const response = await tasksAxios.delete(`/${taskId}`);
+    return response.data.data as number;
   }
 );

@@ -51,14 +51,17 @@ const tasksReducer = createReducer(initialState, (builder) => {
       state.status = Status.Idle;
     }).addCase(updateTask.rejected, (state, action) => {
       state.status = Status.Failed; // TODO handle rejection and req failure
-    }).addCase(deleteTask, (state, action: PayloadAction<number>) => {
-      if (action.payload) {
-        const indexToDelete = state.tasks.findIndex((task) => task.id === action.payload);
+    }).addCase(deleteTask.pending, (state) => {
+      state.status = Status.Loading;
+    }).addCase(deleteTask.fulfilled, (state, action) => {
+      const indexToDelete = state.tasks.findIndex((task) => task.id === action.payload);
         if (indexToDelete > -1) {
           state.tasks.splice(indexToDelete, 1);
         }
         state.taskToEdit = null
-      }
+      state.status = Status.Idle;
+    }).addCase(deleteTask.rejected, (state, action) => {
+      state.status = Status.Failed; // TODO handle rejection and req failure
     }).addCase(searchTasks.pending, (state) => {
       console.log('pending...');
       state.status = Status.Loading;
