@@ -1,9 +1,8 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { GetTasksResponse, ITask } from "../types";
+import { GetTasksResponse, INewTask, ITask } from "../types";
 import tasksAxios from "./tasksAxios";
 
 // actions
-export const addTask = createAction<ITask>('ADD_NEW_TASK');
 export const startEditingTask = createAction<number>('START_EDIT_TASK');
 export const saveEditedTask = createAction<ITask>('SAVE_EDIT_TASK');
 export const deleteTask = createAction<number>('DELETE_TASK');
@@ -24,5 +23,16 @@ export const searchTasks = createAsyncThunk(
       params: { q: query },
     });
     return response.data.data;
+  }
+);
+
+export const addNewTask = createAsyncThunk(
+  'ADD_NEW_TASK_ASYNC',
+  async (newTask: INewTask, thunkAPI): Promise<ITask> => {
+    const response = await tasksAxios.post('/', newTask);
+    return {
+      ...newTask,
+      id: response.data.data as number,
+    };
   }
 );

@@ -1,13 +1,15 @@
-export interface ITask {
-  id?: number;
+export interface INewTask {
   title: string;
   description: string;
+}
+export interface ITask extends INewTask {
+  id: number;
 }
 
 export enum Status{
   Idle = 'idle',
   Loading = 'loading',
-  Success = 'success',
+  // Success = 'success',
   Failed = 'failed',
 }
 

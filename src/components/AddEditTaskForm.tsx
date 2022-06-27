@@ -5,7 +5,7 @@ import {
   useAppSelector,
 } from '../app/hooks';
 import {
-  addTask,
+  addNewTask,
   saveEditedTask,
 } from '../app/actionsAndThunks';
 
@@ -33,7 +33,7 @@ const AddEditTaskForm = (): JSX.Element => {
           description: newDescription,
         }));
       } else {
-        dispatch(addTask({
+        dispatch(addNewTask({
           title: newTitle,
           description: newDescription,
         }));

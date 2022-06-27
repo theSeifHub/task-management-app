@@ -3,7 +3,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import {
-  addTask,
+  addNewTask,
   startEditingTask,
   saveEditedTask,
   searchTasks,
@@ -28,16 +28,17 @@ const tasksReducer = createReducer(initialState, (builder) => {
       state.isSearching = false;
     }).addCase(getTasksList.fulfilled, (state, action) => {
       state.tasks = action.payload.tasks;
-      state.status = Status.Success;
+      state.status = Status.Idle;
       console.log('tasks list fulfilled', action);
     }).addCase(getTasksList.rejected, (state, action) => {
       state.status = Status.Failed; // TODO handle rejection and req failure
-    }).addCase(addTask, (state, action: PayloadAction<ITask>) => {
-      const newTask: ITask = {
-        ...action.payload,
-        id: generateId(state.tasks.length),
-      };
-      state.tasks.push(newTask);
+    }).addCase(addNewTask.pending, (state) => {
+      state.status = Status.Loading;
+    }).addCase(addNewTask.fulfilled, (state, action) => {
+      state.tasks = [action.payload, ...state.tasks];
+      state.status = Status.Idle;
+    }).addCase(addNewTask.rejected, (state, action) => {
+      state.status = Status.Failed; // TODO handle rejection and req failure
     }).addCase(startEditingTask, (state, action: PayloadAction<number>) => {
       state.taskToEdit = state.tasks.find(task => task.id === action.payload)!;
     }).addCase(saveEditedTask, (state, action: PayloadAction<ITask>) => {
@@ -61,7 +62,7 @@ const tasksReducer = createReducer(initialState, (builder) => {
       state.isSearching = true;
     }).addCase(searchTasks.fulfilled, (state, action) => {
       state.tasks = action.payload.tasks;
-      state.status = Status.Success;
+      state.status = Status.Idle;
       console.log('tasks list fulfilled', action);
     }).addCase(searchTasks.rejected, (state, action) => {
       state.status = Status.Failed; // TODO handle rejection and req failure
